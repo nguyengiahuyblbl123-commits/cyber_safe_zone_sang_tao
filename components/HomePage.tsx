@@ -29,7 +29,7 @@ const HomePage: React.FC<HomePageProps> = ({ setActivePage }) => {
         <div className="max-w-4xl mx-auto">
           <ShieldCheckIcon className="w-20 h-20 mx-auto mb-4" />
           <h2 className="text-4xl md:text-5xl font-extrabold mb-4">Chào mừng đến với CyberSafe Zone</h2>
-          <p className="text-lg md:text-xl mb-8">Nơi trang bị cho học sinh THCS những kỹ năng cần thiết để lướt web an toàn và thông minh.</p>
+          <p className="text-lg md:text-xl mb-8">Nơi trang bị cho học sinh những kỹ năng cần thiết để lướt web an toàn và thông minh.</p>
           <button
             onClick={() => setActivePage('knowledge')}
             className="bg-white text-blue-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-100 transition-transform transform hover:scale-105 duration-300"

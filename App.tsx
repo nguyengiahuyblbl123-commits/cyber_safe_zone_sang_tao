@@ -16,11 +16,10 @@ const NavItem: React.FC<{
 }> = ({ label, icon, isActive, onClick }) => (
   <button
     onClick={onClick}
-    className={`flex flex-col sm:flex-row items-center justify-center sm:justify-start w-full sm:w-auto px-4 py-2 sm:px-3 sm:py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
-      isActive
+    className={`flex flex-col sm:flex-row items-center justify-center sm:justify-start w-full sm:w-auto px-4 py-2 sm:px-3 sm:py-2 text-sm font-medium rounded-md transition-colors duration-200 ${isActive
         ? 'bg-blue-600 text-white'
         : 'text-gray-600 hover:bg-blue-100 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
-    }`}
+      }`}
   >
     {icon}
     <span className="mt-1 sm:mt-0 sm:ml-2">{label}</span>
@@ -28,17 +27,17 @@ const NavItem: React.FC<{
 );
 
 const ThemeToggle: React.FC<{ theme: 'light' | 'dark'; toggleTheme: () => void }> = ({ theme, toggleTheme }) => (
-    <button onClick={toggleTheme} className="p-2 rounded-full text-gray-600 hover:bg-blue-100 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors">
-        {theme === 'light' ? (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 008.25-4.502z" />
-            </svg>
-        ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-            </svg>
-        )}
-    </button>
+  <button onClick={toggleTheme} className="p-2 rounded-full text-gray-600 hover:bg-blue-100 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors">
+    {theme === 'light' ? (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 008.25-4.502z" />
+      </svg>
+    ) : (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+      </svg>
+    )}
+  </button>
 );
 
 const App: React.FC = () => {
@@ -46,15 +45,15 @@ const App: React.FC = () => {
   const [quizPacks, setQuizPacks] = useState<QuizPack[]>(QUIZ_PACKS);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
-        const storedTheme = window.localStorage.getItem('theme');
-        if (storedTheme === 'dark' || storedTheme === 'light') {
-            return storedTheme;
-        }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const storedTheme = window.localStorage.getItem('theme');
+      if (storedTheme === 'dark' || storedTheme === 'light') {
+        return storedTheme;
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     return 'light';
   });
-  
+
   useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -84,7 +83,7 @@ const App: React.FC = () => {
         });
         adminPackIndex = newPacks.length - 1;
       }
-      
+
       const updatedPack = { ...newPacks[adminPackIndex] };
       updatedPack.questions = [
         ...updatedPack.questions,
@@ -95,35 +94,35 @@ const App: React.FC = () => {
       return newPacks;
     });
   }, []);
-  
+
   const updateQuestion = useCallback((updatedQuestion: QuizQuestion) => {
     setQuizPacks(prevPacks => {
-        const newPacks = [...prevPacks];
-        const adminPackIndex = newPacks.findIndex(p => p.id === adminPackId);
+      const newPacks = [...prevPacks];
+      const adminPackIndex = newPacks.findIndex(p => p.id === adminPackId);
 
-        if (adminPackIndex !== -1) {
-            const updatedPack = { ...newPacks[adminPackIndex] };
-            const questionIndex = updatedPack.questions.findIndex(q => q.id === updatedQuestion.id);
-            if(questionIndex !== -1) {
-                updatedPack.questions[questionIndex] = updatedQuestion;
-                newPacks[adminPackIndex] = updatedPack;
-            }
+      if (adminPackIndex !== -1) {
+        const updatedPack = { ...newPacks[adminPackIndex] };
+        const questionIndex = updatedPack.questions.findIndex(q => q.id === updatedQuestion.id);
+        if (questionIndex !== -1) {
+          updatedPack.questions[questionIndex] = updatedQuestion;
+          newPacks[adminPackIndex] = updatedPack;
         }
-        return newPacks;
+      }
+      return newPacks;
     });
   }, []);
 
   const deleteQuestion = useCallback((questionId: number) => {
     setQuizPacks(prevPacks => {
-        const newPacks = [...prevPacks];
-        const adminPackIndex = newPacks.findIndex(p => p.id === adminPackId);
+      const newPacks = [...prevPacks];
+      const adminPackIndex = newPacks.findIndex(p => p.id === adminPackId);
 
-        if (adminPackIndex !== -1) {
-            const updatedPack = { ...newPacks[adminPackIndex] };
-            updatedPack.questions = updatedPack.questions.filter(q => q.id !== questionId);
-            newPacks[adminPackIndex] = updatedPack;
-        }
-        return newPacks;
+      if (adminPackIndex !== -1) {
+        const updatedPack = { ...newPacks[adminPackIndex] };
+        updatedPack.questions = updatedPack.questions.filter(q => q.id !== questionId);
+        newPacks[adminPackIndex] = updatedPack;
+      }
+      return newPacks;
     });
   }, []);
 
@@ -139,11 +138,11 @@ const App: React.FC = () => {
       case 'about':
         return <AboutPage />;
       case 'admin':
-        return <AdminPage 
-            adminQuestions={quizPacks.find(p => p.id === adminPackId)?.questions || []}
-            addQuestion={addQuestion} 
-            updateQuestion={updateQuestion}
-            deleteQuestion={deleteQuestion}
+        return <AdminPage
+          adminQuestions={quizPacks.find(p => p.id === adminPackId)?.questions || []}
+          addQuestion={addQuestion}
+          updateQuestion={updateQuestion}
+          deleteQuestion={deleteQuestion}
         />;
       default:
         return <HomePage setActivePage={setActivePage} />;
@@ -168,20 +167,20 @@ const App: React.FC = () => {
               <h1 className="ml-3 text-2xl font-bold text-gray-800 dark:text-white">CyberSafe Zone</h1>
             </div>
             <div className="flex items-center">
-                <nav className="hidden sm:flex sm:space-x-2">
+              <nav className="hidden sm:flex sm:space-x-2">
                 {navItems.map(item => (
-                    <NavItem
+                  <NavItem
                     key={item.page}
                     label={item.label}
                     icon={item.icon}
                     isActive={activePage === item.page}
                     onClick={() => setActivePage(item.page)}
-                    />
+                  />
                 ))}
-                </nav>
-                <div className="ml-4">
-                    <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-                </div>
+              </nav>
+              <div className="ml-4">
+                <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+              </div>
             </div>
           </div>
         </div>
@@ -193,7 +192,7 @@ const App: React.FC = () => {
 
       <footer className="bg-white border-t dark:bg-gray-800 dark:border-gray-700">
         <div className="container mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-gray-500 dark:text-gray-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} CyberSafe Zone. Dự án học tập của học sinh THCS.</p>
+          <p>&copy; {new Date().getFullYear()} CyberSafe Zone. Dự án học tập của học sinh.</p>
         </div>
       </footer>
 
