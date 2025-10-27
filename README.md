@@ -102,11 +102,11 @@ Cài đặt và chạy dự án
 # 1. Cài dependencies
 npm install
 
-# 2. Thêm khóa API vào file .env.local
-GEMINI_API_KEY=your_api_key_here
-
-# 3. Chạy ứng dụng
+# 2. Chạy ứng dụng
 npm run dev
+
+# 3. Mở google chrome và nhập vào địa chỉ: http://localhost:3000.
+=> Trang web sẽ hoạt động
 
 
 ✨ CyberSafe Zone – Cùng học sinh xây dựng môi trường Internet an toàn! ✨
